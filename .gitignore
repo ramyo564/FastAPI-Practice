@@ -1,0 +1,38 @@
+# Python 기본 무시 항목
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# 가상환경 폴더 (venv, env 등 - 이름에 따라 조정)
+venv/
+env/
+.venv/
+
+# IDE 설정 파일
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS 무시 파일
+.DS_Store
+Thumbs.db
+
+# 환경변수/비밀정보
+.env
+*.env
+
+# 로그파일
+*.log
+
+# FastAPI에서 자주 사용되는 파일
+instance/
+*.sqlite3
+
+# Uvicorn 관련 pid 파일 (실행 시 생성될 수 있음)
+*.pid
