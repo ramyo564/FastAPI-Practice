@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from enum import Enum
+from typing import Optional
 
 app = FastAPI()
 
@@ -10,7 +11,7 @@ def index():
 
 
 @app.get("/blog/all")
-def get_all_bolg(page, page_size):
+def get_all_bolg(page, page_size: Optional[int] = None):
     return {"message": f"All {page_size} blogs on page {page}"}
 
 
