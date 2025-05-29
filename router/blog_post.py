@@ -25,8 +25,13 @@ def create_comment(
         None,
         title="Id of the comment",
         description="Some description for comment_id",
-        deprecated=True
+        deprecated=True,
         # alias="commentId",
     ),
+    # content: str = Body("Hi how are you"),                  <- default pamareters
+    # content: str = Body(Ellipsis),                          <- non-optional pamareters
+    # content: str = Body(...),                               <- non-optional pamareters
+    # content: str = Body(..., min_length=10, max_length=20), <- Require min, max length
+    content: str = Body(..., min_length=10, max_length=50, regex="^[a-z\s]*$"),
 ):
-    return {"blog": blog, "id": id, "comment_id": comment_id}
+    return {"blog": blog, "id": id, "comment_id": comment_id, "content": content}
