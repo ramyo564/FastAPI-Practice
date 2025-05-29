@@ -1,8 +1,13 @@
-from typing import Optional, List
+from typing import Optional, List, Dict
 from fastapi import APIRouter, Query, Path, Body
 from pydantic import BaseModel
 
 router = APIRouter(prefix="/blog", tags=["blog"])
+
+
+class Image(BaseModel):
+    url: str
+    alias: str
 
 
 class BlogModal(BaseModel):
@@ -10,6 +15,17 @@ class BlogModal(BaseModel):
     content: str
     nb_comments: int
     pubished: Optional[bool]
+    tags: List[str] = []
+    metadata: Dict[str, str] = {"key1": "value"}
+    image: Optional[Image] = None
+
+
+"""
+Pydantic models are not restricted to simple types
+tags: List[str] = []
+List, set, dict, tuplr
+Coustom model subtypes
+"""
 
 
 @router.post("/new/{id}")
@@ -35,7 +51,7 @@ def create_comment(
     content: str = Body(..., min_length=10, max_length=50, regex="^[a-z\s]*$"),
     # v: Optional[List[str]] = Query(None),                   <= Define an Optional query parameter
     v: Optional[List[str]] = Query(["1.0", "1.1", "1.2"]),
-    comment_id: int = Path(..., gt=5, le=10)
+    comment_id: int = Path(..., gt=5, le=10),
 ):
     return {
         "blog": blog,
