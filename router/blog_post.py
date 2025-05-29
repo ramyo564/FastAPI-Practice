@@ -12,6 +12,6 @@ class BlogModal(BaseModel):
     pubished: Optional[bool]
 
 
-@router.post("/new")
-def create_blog(blog: BlogModal):
-    return {"data": blog}
+@router.post("/new/{id}")
+def create_blog(blog: BlogModal, id: int, version: int = 1):
+    return {"id": id, "data": blog, "version": version}
